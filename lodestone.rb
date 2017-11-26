@@ -19,7 +19,11 @@ configure do
   # Cache static assets for one week
   set :static_cache_control, [:public, max_age: 604_800]
 
-  Dir['lib/*.rb'].each { |lib| load lib }
+  load 'lib/news_cache.rb'
+  load 'lib/news.rb'
+  load 'lib/scheduler.rb'
+  load 'lib/webhooks.rb'
+
   Redis.current = Redis::Namespace.new(:lodestone)
   Scheduler.run(logger)
 end
