@@ -2,7 +2,7 @@ module News
   extend self
   extend NewsCache
 
-  BASE_URL = 'http://na.finalfantasyxiv.com'.freeze
+  BASE_URL = 'http://eu.finalfantasyxiv.com'.freeze
   CATEGORIES = OpenStruct.new(YAML.load_file('config/categories.yml')).freeze
 
   def fetch(type, skip_cache = false)
