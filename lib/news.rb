@@ -7,8 +7,7 @@ module News
 
   def fetch(type, skip_cache = false)
     category = CATEGORIES[type]
-    server_url = "https://lodestone.stderr.cc"
-    category = category % { :server_url => server_url }
+
     raise ArgumentError if category.nil?
 
     if skip_cache || stale?(type)

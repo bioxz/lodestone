@@ -1,30 +1,30 @@
 topics:
   name: 'Topics'
   url: 'https://na.finalfantasyxiv.com/lodestone/topics'
-  icon: '%{server_url}/images/topics.png'
-  thumbnail: '%{server_url}/images/thumbnail.png'
+  icon: 'https://lodestone.stderr.cc/images/topics.png'
+  thumbnail: 'https://lodestone.stderr.cc/images/thumbnail.png'
   color: 14258475
 
 notices:
   name: 'Notices'
   url:  'https://na.finalfantasyxiv.com/lodestone/news/category/1'
-  icon: '%{server_url}/images/notices.png'
+  icon: 'https://lodestone.stderr.cc/images/notices.png'
   color: 13421772
 
 maintenance:
   name: 'Maintenance'
   url:  'https://na.finalfantasyxiv.com/lodestone/news/category/2'
-  icon: '%{server_url}/images/maintenance.png'
+  icon: 'https://lodestone.stderr.cc/images/maintenance.png'
   color: 13413161
 
 updates:
   name: 'Updates'
   url:  'https://na.finalfantasyxiv.com/lodestone/news/category/3'
-  icon: '%{server_url}/images/updates.png'
+  icon: 'https://lodestone.stderr.cc/images/updates.png'
   color: 7051581
 
 status:
   name: 'Status'
   url:  'https://na.finalfantasyxiv.com/lodestone/news/category/4'
-  icon: '%{server_url}/images/status.png'
+  icon: 'https://lodestone.stderr.cc/images/status.png'
   color: 10042685
