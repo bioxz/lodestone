@@ -2,7 +2,7 @@ topics:
   name: 'Topics'
   url: 'https://na.finalfantasyxiv.com/lodestone/topics'
   icon: '%{server_url}/images/topics.png'
-  thumbnail: '%{server_url}http://lodestone.raelys.com/images/thumbnail.png'
+  thumbnail: '%{server_url}/images/thumbnail.png'
   color: 14258475
 
 notices:
