@@ -26,7 +26,7 @@ https://lodestone.stderr.cc/
 1. Run an instance of redis:alpine named redis for data storage. Don't forget to create a persistant data storage like /opt/redis/.
     *  docker run --rm --name redis -v /opt/redis/:/data/ redis:alpine
 2. Get the lodestone webhook source
-    * `git clone https://github.com/mattantonelli/lodestone-api`
+    * `git clone https://github.com/bioxz/lodestone/`
 3. Build the docker image
     * `docker build -t lodestone:latest .`
 4. Run the image. Adjust the client port (8080) to your needs
