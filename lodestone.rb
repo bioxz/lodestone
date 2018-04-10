@@ -10,26 +10,26 @@ require 'thwait'
 require 'yaml'
 
 configure do
-  file = File.new("#{settings.root}/log/#{settings.environment}.log", 'a')
-  file.sync = true
-  logger = Logger.new(file)
-  set :logger, logger
-  use Rack::CommonLogger, logger
+  require_relative 'lib/logger.rb'
+  require_relative 'lib/news.rb'
+  require_relative 'lib/scheduler.rb'
+  require_relative 'lib/webhooks.rb'
+
+  use Rack::CommonLogger, LodestoneLogger.logger
+  set :logger, LodestoneLogger.logger
+
+  # Do not log requests to STDERR in production
+  set :logging, nil if settings.production?
 
   # Cache static assets for one week
   set :static_cache_control, [:public, max_age: 604_800]
 
-  load 'lib/news_cache.rb'
-  load 'lib/news.rb'
-  load 'lib/scheduler.rb'
-  load 'lib/webhooks.rb'
-
   Redis.current = Redis::Namespace.new(:lodestone)
-  Scheduler.run(logger)
+  Scheduler.run
 end
 
 get '/' do
-  @categories = { topics: '1', notices: '1', maintenance: '1', updates: '1', status: '1' }
+  @categories = { topics: '1', notices: '0', maintenance: '1', updates: '1', status: '0' }
   @code = params['code']
   erb :index
 end
@@ -52,13 +52,28 @@ post '/' do
   erb :index
 end
 
+# Check subscription status
 get '/news/subscribe' do
   cache_control :no_cache
 
   begin
-    json News.subscribe(params)
+    json News.subscribe(params, true)
   rescue ArgumentError
     halt 400, json(error: 'Invalid webhook URL.')
+  end
+end
+
+# Subscribe/update subscription
+post '/news/subscribe' do
+  cache_control :no_cache
+
+  begin
+    data = JSON.parse(request.body.read)
+    json News.subscribe(data, true)
+  rescue ArgumentError
+    halt 400, json(error: 'Invalid webhook URL.')
+  rescue JSON::ParserError
+    halt 400, json(error: 'Invalid JSON body.')
   end
 end
 
